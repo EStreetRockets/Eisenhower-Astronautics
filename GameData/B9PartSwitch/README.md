@@ -10,7 +10,7 @@ http://forum.kerbalspaceprogram.com/index.php?showtopic=140541
 
 ## Requirements
 
-* KSP version 1.8.1 (build 2694) is the only supported KSP version
+* KSP version 1.9.0 (build 2781) is the only supported KSP version
 * [ModuleManager](http://forum.kerbalspaceprogram.com/index.php?showtopic=50533) is required.
 
 ## Installation
@@ -29,7 +29,21 @@ This plugin is distributed under [LGPL v3.0](http://www.gnu.org/licenses/lgpl-3.
 
 ## Changelog
 
-# v2.14.0
+# v2.15.2
+
+* Fix `ModuleJettison` shrouds disappearing in flight (again)
+
+# v2.15.1
+
+* Preserve drag cube weights when recalculating drag cubes
+* Don't call drag cube update methods that will be called by the flight integrator anyway
+* Ensure drag cubes aren't recalculated in flight regardless of configuration (it breaks things)
+
+# v2.15.0
+
+* Recompile against KSP 1.9.1
+
+### v2.14.0
 
 * Fix non-unique aspects complaining when present on more than one module
 * Generic material modifiers
@@ -43,25 +57,31 @@ This plugin is distributed under [LGPL v3.0](http://www.gnu.org/licenses/lgpl-3.
       * `shaderProperty` - name of the shader property to modify (default `_Color`)
       * `color` - color to set the property to, can be specified in any of the regular formats (name, hex, RGB(A) list)
     * `TEXTURE` modifies a texture property (same functionality as `TEXTURE` nodes directly on the subtype)
-      * `currentTexture` - name of current texture to match when building (not full path)
+      * `currentTexture` - name of current texture to match when building (not full path) (optional)
       * `texture` - path to new texture to switch to
-      * `isNormalMap` - whether to access the texture as a normal map or not
+      * `isNormalMap` - whether to access the texture as a normal map or not (default false)
       * `shaderProperty` - shader property to modify the color on
         * Default `_MainTex` if `isNormalMap = false`
         * Default `_BumpMap` is `isNormalMap = true`
+* Listen for `OnPartModelChanged` event to reinitialize model
+* Send `ModuleDataChanged` to modules that have had their data changed
+  * Include two attributes in the event details, `requestNotifyFARToRevoxelize` and `requestRecalculateDragCubes`, which can be used to request FAR/drag cubes updates at the end of the cycle
+* Transform move/rotation/scale now affect drag cubes/FAR
+* Send/listen for `DragCubesWereRecalculated` and `FarWasNotifiedToRevoxelize` to make sure actions are only done once per cycle
+* Fix drag cube updates possibly not actually being used
 
-# v2.13.0
+### v2.13.0
 
 * Support changing `ModuleDeployableSolarPanel` `chargeRate`
 * Get rid of some useless debug messages related to UI prefabs
 * Fix UI breaking on switchers with tech restrictions if subtypes are unlocked out of order
 * Fix texture switches breaking on inactive subtypes when a part is duplicated
 
-# v2.12.1
+### v2.12.1
 
 * Recompile against KSP 1.8.1
 
-# v2.12.0
+### v2.12.0
 
 * Recompile against KSP 1.8.0
 * Stop moving the switcher to the end of the part action window
@@ -129,7 +149,7 @@ This plugin is distributed under [LGPL v3.0](http://www.gnu.org/licenses/lgpl-3.
     * `IntersteallarMeshSwitch`
     * `InterstellarTextureSwitch`
 
-# v2.9.0
+### v2.9.0
 
 * Implement new switching UI based on the stock variant switcher
 * Have subtype switching buttons show some info about the subtype being switched to in a tooltip
@@ -172,11 +192,11 @@ This plugin is distributed under [LGPL v3.0](http://www.gnu.org/licenses/lgpl-3.
   * Ore
   * ElectricCharge
 
-# v2.8.1
+### v2.8.1
 
 * Recompile against KSP 1.7.3
 
-# v2.8.0
+### v2.8.0
 
 * Recompile against KSP 1.7.1
 * Fix part action window showing removed resources in KSP 1.7.1
