@@ -1,5 +1,5 @@
 # Eisenhower-Astronautics
- Eisenhower Astronautics adds the Angara rocket and other Post-Soviet rockets to Kerbal Space Program. Currently, the complete Angara launch vehicle, Roscosmos' current slate of launch vehicles, Orel, Kliper, and more are planned for the mod.
+ Eisenhower Astronautics adds the Angara rocket and other Post-Soviet rockets to Kerbal Space Program. Currently, the complete Angara vehicle family, Roscosmos' current slate of next generation launch vehicles, Orel, Kliper, and more are planned for the mod.
  
  Many thanks to:
   * PickledTripod for the RD-191 model.
